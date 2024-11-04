@@ -12,5 +12,5 @@ class Person(User):
     phone_number = models.IntegerField()
     
     
-
+  
     
