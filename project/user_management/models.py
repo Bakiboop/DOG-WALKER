@@ -9,7 +9,7 @@ class Person(User):
     first_name = models.CharField(max_length= 50)
     last_name = models.CharField(max_length= 50)
     address = models.CharField(max_length= 50)
-    phone_number = models.IntegerField(max_length = 10)
+    phone_number = models.IntegerField()
     
     
 

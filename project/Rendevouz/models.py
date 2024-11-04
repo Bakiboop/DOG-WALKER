@@ -1,5 +1,5 @@
 from django.db import models
-from project.my_app.models import User
+from user_management.models import User
 
 class Dog(models.Model):
     breed=models.CharField(max_length=30)
