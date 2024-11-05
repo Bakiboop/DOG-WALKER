@@ -1,0 +1,15 @@
+.button {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: rgb(245, 184, 245);
+    border-radius: 10px;
+    padding: 10px; /* Προσθήκη padding για καλύτερη εμφάνιση */
+    display: inline-block; /* Για να περιέχει το <a> στοιχείο */
+    
+}
+
+.button a {
+    text-decoration: none;
+    color: inherit; /* Για να κρατήσει το χρώμα του κουμπιού */
+    display: block; /* Για να καταλαμβάνει ολόκληρο το κουμπί */
+}

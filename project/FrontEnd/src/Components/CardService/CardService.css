@@ -1,0 +1,25 @@
+.ImageService {
+
+    max-width: 200px; /* Προσαρμόστε το μέγεθος της εικόνας */
+    border-radius: 30%;
+
+}
+
+.CardService{
+    border: 2px solid rgb(182, 17, 182);
+    border-radius: 10px;
+    display:flex;
+    background: linear-gradient(to right,  rgb(228, 207, 227), white); /* Από αριστερά προς δεξιά */
+    
+
+}
+
+.TextContainer {
+    display: flex;
+    flex-direction: column; /* Κάθετη διάταξη για τον τίτλο και το κείμενο */
+    margin-left: 20px; /* Απόσταση ανάμεσα στην εικόνα και το κείμενο */
+}
+
+.Button{
+    display: flex;
+}
