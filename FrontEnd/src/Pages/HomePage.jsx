@@ -16,6 +16,7 @@ function HomePage() {
     <>
         <Header />
         <hr></hr>
+        <h1 style={{ textAlign: 'center' }}>Υπηρεσίες</h1>
         <CardService image={DogWalking} service="Dog Walking - Βόλτα Σκύλου" details = "ΒΓΑΖΩ ΤΟΝ ΣΚΥΛΟ ΣΑΣ ΒΟΛΤΑ" />
         <CardService image={Filoksenia} service="Pet Boarding - Φιλοξενεία στο Χώρο του Κατοικιδίου" details = "Κρατώ τον Σκύλο σας στον χώρο σας" />
         <CardService image={PetSitting} service="Pet Sitting - Φιλοξενία στο Χώρο μου" details = "Φιλοξενώ τον σκύλο σας στον χώρο μου" />

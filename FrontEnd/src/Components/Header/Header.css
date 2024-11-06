@@ -10,6 +10,7 @@ header {
     align-items: center;
     padding: 10px 20px;
     background-color: rgb(235, 183, 222);
+    position: relative;
 }
 
 .phone-number {
@@ -66,9 +67,13 @@ header {
 }
 
 .HeaderImage {
-    position: absolute;
-    top: 0px;
-    max-width: 150px; /* Προσαρμόστε το μέγεθος της εικόνας */
+    max-width: 155px; 
     border-radius: 50%;
-    z-index: 3; /* Η εικόνα θα εμφανίζεται πάνω από όλα τα άλλα στοιχεία */
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1;
+    top: 5px;
+    box-shadow: 7px 7px 7px black;
+    height: auto;
 }

@@ -21,7 +21,7 @@ function Header(){
         <header>
            
 
-
+            
             <div className="first-row">
             <div className="phone-number" > <FontAwesomeIcon icon={faPhone} shake style={{color: "#B197FC",}} />  6949470504
             <div className="social-icons">

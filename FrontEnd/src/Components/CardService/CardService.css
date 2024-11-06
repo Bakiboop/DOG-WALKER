@@ -1,17 +1,27 @@
 .ImageService {
+    width: 300px; /* Σταθερό πλάτος */
+    height: 300px; /* Σταθερό ύψος */
+    border-radius: 50%;
+    object-fit: cover; /* Καλύτερη προσαρμογή της εικόνας στο container */
+    display: block;
+    margin: 0 auto; /* Κεντράρισμα της εικόνας οριζόντια */
 
-    max-width: 200px; /* Προσαρμόστε το μέγεθος της εικόνας */
-    border-radius: 30%;
+
+
 
 }
 
 .CardService{
     border: 2px solid rgb(182, 17, 182);
     border-radius: 10px;
-    display:flex;
+    display:inline-block;
     background: linear-gradient(to right,  rgb(228, 207, 227), white); /* Από αριστερά προς δεξιά */
-    
+    width: 400px;
+    height: 500px; /* Σταθερό ύψος */
+    padding: 20px;
+    margin: 10px;
 
+    
 }
 
 .TextContainer {
@@ -21,5 +31,7 @@
 }
 
 .Button{
-    display: flex;
+position: relative;
+display: inline-block;
+max-width: 160px;
 }
