@@ -15,6 +15,10 @@ def signup(request):
 def login(request):
     return render(request, 'login.html')
 
+def home(request):
+    return render(request, 'home.html')
+
+
 
 class SignupView(generics.CreateAPIView):
     serializer_class = PersonSignupSerializer
