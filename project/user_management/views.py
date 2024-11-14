@@ -41,7 +41,7 @@ class LoginView(TokenObtainPairView):
             "refresh": str(refresh),
             "access": str(refresh.access_token),
         }, status=status.HTTP_200_OK)
-    
+
     
 
 
