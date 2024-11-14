@@ -21,7 +21,7 @@ from user_management import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.home, name='home'),
-    path('api/user/', include('user_management.urls')),
+    path('api/', include('user_management.urls')),
     
 ]
 

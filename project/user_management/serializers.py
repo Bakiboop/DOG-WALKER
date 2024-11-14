@@ -22,7 +22,7 @@ class PersonSignupSerializer(serializers.ModelSerializer):
         
         # Δημιουργία χρήστη με κρυπτογράφηση κωδικού
         person = Person(**validated_data)
-        person.set_password(password) 
+ 
         person.save()
         
         return person
