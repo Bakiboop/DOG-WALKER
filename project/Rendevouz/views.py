@@ -9,6 +9,7 @@ from rest_framework.views import APIView
 # Create your views here.
 
 class DogView(APIView):
+    serializer_class=DogSerializer
 
     def get(self, request , pk = None):
         if pk:
