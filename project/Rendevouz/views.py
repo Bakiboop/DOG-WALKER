@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render , get_object_or_404
 from .serializers import DogSerializer
 from . models import Dog
@@ -13,11 +12,11 @@ class DogView(APIView):
 
     def get(self, request , pk = None):
         if pk:
-            dog = get_object_or_404(Dog , pk=pk)
+            dog = get_object_or_404(Dog , owner=request.user, pk=pk)
             serializer = DogSerializer(dog)
             return Response(serializer.data)
         else:
-            dogs = Dog.objects.all()
+            dogs = Dog.objects.filter(owner=request.user)
             serializer = DogSerializer(dogs, many=True)
             return Response(serializer.data)
 
@@ -37,8 +36,8 @@ class DogView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def delete(self , requst , pk):
-        dog = get_object_or_404(Dog, pk=pk)
+    def delete(self , request , pk):
+        dog = get_object_or_404(Dog, pk=pk , owner=request.user)
         dog.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
