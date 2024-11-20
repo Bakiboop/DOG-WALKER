@@ -21,9 +21,7 @@ from user_management import views
 
 
 urlpatterns = [
-    path('signup/', views.signup, name='signup'), 
-    path('login/', views.login, name='login'),
-    path('api/login/', views.LoginView.as_view(), name='api_login'),
-    path('api/signup/', views.SignupView.as_view(), name='api_signup'),
+    path('signup/', views.signup_view, name='signup'), 
+    path('login/' , views.login_view , name = 'login'),
  ]
 
