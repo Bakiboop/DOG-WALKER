@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Login.css'; // Αν έχετε επιπλέον στυλ για το Login component
+import './Login.css'; 
 
 
 function Login() {

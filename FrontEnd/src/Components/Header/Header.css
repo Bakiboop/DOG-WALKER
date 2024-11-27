@@ -67,7 +67,7 @@ header {
 }
 
 .HeaderImage {
-    max-width: 155px; 
+    width: 155px; 
     border-radius: 50%;
     position: absolute; 
     left: 50%; 

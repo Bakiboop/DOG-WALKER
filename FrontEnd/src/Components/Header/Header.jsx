@@ -29,7 +29,7 @@ function Header(){
             <a href="https://www.facebook.com/profile.php?id=61561162122957" className="social-icon"><FontAwesomeIcon icon={faFacebookF} size="2xl" style={{ color: "#aa5dac" }} /></a>
             </div></div>
             <div><Link to="/"><img className="HeaderImage" src={profilePic} alt="profile picture" /></Link></div>
-            <ButtonKratisi/>
+            <Link to ="/randevou"><ButtonKratisi/></Link>
             </div>
 
 
@@ -37,6 +37,7 @@ function Header(){
                 <ul>
                     <li><Link to ="/">Φόρμα Επικοινωνίας</Link></li>
                     <li><Link to ="/login">Σύνδεση/Εγγραφή</Link></li>
+                    
                     
 
 
