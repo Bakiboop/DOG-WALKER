@@ -1,0 +1,79 @@
+header {
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.first-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(235, 183, 222);
+    position: relative;
+}
+
+.phone-number {
+    font-size: 18px;
+    font-weight: bold;
+    
+}
+
+.social-icon {
+    padding: 10px;
+    margin-left: 10px;
+    
+}
+
+.social-icons {
+    display: flex; /* Χρησιμοποιούμε flex για να διασφαλίσουμε ότι τα icons είναι σε μία γραμμή */
+    align-items: center; /* Κεντράρουμε τα icons κατακόρυφα */
+    padding: 5px;
+}
+
+
+
+
+
+.navbar {
+
+    top: 0; /* Τοποθετεί το navbar στην κορυφή της σελίδας */
+    width: 100%;
+    z-index: 2; /* Το navbar θα εμφανίζεται πάνω από το header */
+}
+
+.navbar ul{
+    list-style-type: none;
+    background-color: rgb(219, 124, 219);
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: bold;
+
+}
+.navbar a{
+    color:black;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+    
+}
+
+.navbar li{
+    float: left;
+    
+}
+
+.HeaderImage {
+    width: 155px; 
+    border-radius: 50%;
+    position: absolute; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 1;
+    top: 5px;
+    box-shadow: 7px 7px 7px black;
+    height: auto;
+}
