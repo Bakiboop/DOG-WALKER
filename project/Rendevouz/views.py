@@ -4,15 +4,17 @@ from . models import Dog
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 class DogView(APIView):
     serializer_class=DogSerializer
+    permission_classes=[IsAuthenticated]
 
     def get(self, request , pk = None):
         if pk:
-            dog = get_object_or_404(Dog , owner=request.user, pk=pk)
+            dog = get_object_or_404(Dog , owner=request.user ,pk=pk)
             serializer = DogSerializer(dog)
             return Response(serializer.data)
         else:
@@ -23,13 +25,13 @@ class DogView(APIView):
     def post(self, request):
         serializer = DogSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(owner=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
     def put(self , request, pk):
-        dog = get_object_or_404(Dog , pk=pk)
+        dog = get_object_or_404(Dog , pk=pk , owner=request.user)
         serializer = DogSerializer(dog , data=request.data)
         if serializer.is_valid():
             serializer.save()
