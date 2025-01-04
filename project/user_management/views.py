@@ -7,59 +7,84 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import UserSignUpSerializer
 from .serializers import UserLoginSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
-class signup_view(APIView):
-    serializer_class =  UserSignUpSerializer
+class SignupView(APIView):
+    serializer_class = UserSignUpSerializer
+
     def post(self, request, *args, **kwargs):
         serializer = UserSignUpSerializer(data=request.data)
         
         if serializer.is_valid():
             # Save the new user
             new_user = serializer.save()
-            
+
+            # Create JWT tokens
+            refresh = RefreshToken.for_user(new_user)
+            access_token = str(refresh.access_token)
+
             # Authenticate the user
             email = serializer.validated_data.get('email')
             password = request.data.get('password')  # Assuming password is passed in request
             
-            new_user = authenticate(request, email=email, password=password)
-            if new_user is not None:
-                login(request, new_user)
+            authenticated_user = authenticate(request, email=email, password=password)
+            if authenticated_user is not None:
+                # Optional: Log the user in if you want them to be logged in immediately
+                login(request, authenticated_user)
                 messages.success(request, "Account successfully created")
-                return redirect("login")
+                
+                # You can return both JWT tokens and a success message
+                return Response({
+                    'message': 'Account successfully created',
+                    'access': access_token,
+                    'refresh': str(refresh),
+                }, status=status.HTTP_201_CREATED)
             
             return Response({'error': 'Authentication failed'}, status=status.HTTP_400_BAD_REQUEST)
         
-        # Return validation errors
+        # Return validation errors if serializer is invalid
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
         # If you want to render a form-like response, you can optionally include this
         return Response({'message': 'Signup endpoint. Submit user data via POST.'})
 
-class login_view(APIView):
+class LoginView(APIView):
     serializer_class = UserLoginSerializer
 
     def post(self, request, *args, **kwargs):
-        # Χρησιμοποίησε τον UserLoginSerializer για επικύρωση των δεδομένων
+        # Χρησιμοποιούμε τον UserLoginSerializer για επικύρωση των δεδομένων
         serializer = self.serializer_class(data=request.data)
+        
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        # Πάρε τα επικυρωμένα δεδομένα
+        
+        # Παίρνουμε τα επικυρωμένα δεδομένα
         email = serializer.validated_data.get('email')
         password = serializer.validated_data.get('password')
 
-        # Αυθεντικοποίησε τον χρήστη
+        # Αυθεντικοποιούμε τον χρήστη
         user = authenticate(request, email=email, password=password)
+        
         if user is not None:
-            # Αν ο χρήστης είναι έγκυρος, κάνε login και ανακατεύθυνέ τον
-            login(request, user)
+            # Δημιουργούμε τα JWT tokens
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+            
+            # Επιλογή: Να κάνουμε login στο Django session ή να επιστρέψουμε JWT
+            login(request, user)  # Αν θέλουμε να χρησιμοποιούμε Django session login
             messages.success(request, "You have successfully logged in.")
-            return redirect("home")  # Redirect στο home page
-        else:
-            # Επιστροφή σφάλματος αν τα credentials είναι λάθος
-            return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+            # Επιστρέφουμε τα JWT tokens και το μήνυμα επιτυχίας
+            return Response({
+                'message': 'Login successful',
+                'access': access_token,
+                'refresh': str(refresh),
+            }, status=status.HTTP_200_OK)
+
+        # Επιστροφή σφάλματος αν τα credentials είναι λάθος
+        return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
     def get(self, request, *args, **kwargs):
         # Προαιρετική μέθοδος GET
