@@ -21,7 +21,8 @@ from user_management import views
 
 
 urlpatterns = [
-    path('signup/', views.signup_view.as_view(), name='signup'), 
-    path('login/' , views.login_view.as_view() , name = 'login'),
- ]
+    path('signup/', views.signup_view.as_view(), name='signup'),
+    path('login/', views.login_view.as_view(), name='login'),
+    path('home/', views.home, name='home'),
+]
 
