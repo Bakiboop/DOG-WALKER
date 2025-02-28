@@ -1,47 +1,77 @@
-from django.shortcuts import render , get_object_or_404
-from .serializers import DogSerializer
-from . models import Dog
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-
-# Create your views here.
+from .services import DogService, AppointmentService
+from .serializers import DogSerializer, AppointmentBookingSerializer
 
 class DogView(APIView):
+    permission_classes = [IsAuthenticated]
     serializer_class=DogSerializer
-    permission_classes=[IsAuthenticated]
 
-    def get(self, request , pk = None):
+    def __init__(self, dog_service=None):
+        # Inject the service manually (default to DogService if not provided)
+        self.dog_service = dog_service if dog_service else DogService()
+
+    def get(self, request, pk=None):
         if pk:
-            dog = get_object_or_404(Dog , owner=request.user ,pk=pk)
+            dog = self.dog_service.get_dog_by_id(request.user, pk)
             serializer = DogSerializer(dog)
             return Response(serializer.data)
         else:
-            dogs = Dog.objects.filter(owner=request.user)
+            dogs = self.dog_service.get_dogs_by_owner(request.user)
             serializer = DogSerializer(dogs, many=True)
             return Response(serializer.data)
 
     def post(self, request):
-        serializer = DogSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(owner=request.user)
+        serializer = self.dog_service.create_dog(request.user, request.data)
+        if serializer:
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk):
+        dog = self.dog_service.get_dog_by_id(request.user, pk)
+        serializer = self.dog_service.update_dog(dog, request.data)
+        if serializer:
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        dog = self.dog_service.get_dog_by_id(request.user, pk)
+        self.dog_service.delete_dog(dog)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class AppointmentsView(APIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class=AppointmentBookingSerializer
+    def __init__(self, appointment_service=None):
+        # Inject the service manually (default to AppointmentService if not provided)
+        self.appointment_service = appointment_service if appointment_service else AppointmentService()
+
+    def get(self, request, pk=None):
+        if pk:
+            appointment = self.appointment_service.get_appointment_by_id(request.user, pk)
+            serializer = AppointmentBookingSerializer(appointment)
+            return Response(serializer.data)
+        else:
+            appointments = self.appointment_service.get_appointments_by_owner(request.user)
+            serializer = AppointmentBookingSerializer(appointments, many=True)
+            return Response(serializer.data)
+
+    def post(self, request):
+        serializer = self.appointment_service.create_appointment(request.user, request.data)
+        if serializer:
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
-    def put(self , request, pk):
-        dog = get_object_or_404(Dog , pk=pk , owner=request.user)
-        serializer = DogSerializer(dog , data=request.data)
-        if serializer.is_valid():
-            serializer.save()
+    def put(self, request, pk):
+        appointment = self.appointment_service.get_appointment_by_id(request.user, pk)
+        serializer = self.appointment_service.update_appointment(appointment, request.data)
+        if serializer:
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def delete(self , request , pk):
-        dog = get_object_or_404(Dog, pk=pk , owner=request.user)
-        dog.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
-    
- 
+    def delete(self, request, pk):
+        appointment = self.appointment_service.get_appointment_by_id(request.user, pk)
+        self.appointment_service.delete_appointment(appointment)
+        return Response(status=status.HTTP_204_NO_CONTENT)
