@@ -1,0 +1,59 @@
+/* Αύξηση του μεγέθους του συνολικού DatePicker */
+.react-datepicker {
+    padding: 10px; /* Προσαρμογή padding */
+}
+
+/* Αύξηση μεγέθους των ημερών */
+.react-datepicker__day {
+    padding: 10px; /* Περισσότερο padding γύρω από κάθε μέρα */
+    font-size: 17px; /* Αύξηση γραμματοσειράς */
+    width: 50px; /* Πλάτος ημερών */
+    height: 40px; /* Ύψος ημερών */
+    
+    
+}
+
+/* Προσαρμογή κεφαλίδας */
+.react-datepicker__header {
+    font-size: 20px; /* Αύξηση γραμματοσειράς στην κεφαλίδα */
+    background-color: #e0a0f3; /* Σκούρο μοβ */
+    padding: 10px;
+    
+}
+
+
+/* Στυλ για τον container των ονομάτων των ημερών */
+.react-datepicker__day-names {
+    display: flex; /* Flexbox για ευθυγράμμιση */
+    justify-content: space-between; /* Ίσες αποστάσεις ανάμεσα στις ημέρες */
+}
+
+/* Στυλ για κάθε ημέρα (Sun, Mon, ...) */
+.react-datepicker__day-name {
+
+    font-weight: bold; /* Έντονη γραφή */
+    text-align: center; /* Κεντραρισμένο κείμενο */
+    width: 100%; /* Κατανομή ίσου πλάτους για ομοιόμορφη εμφάνιση */
+
+}
+
+
+
+
+
+/* Προσαρμογή μεγέθους των κουμπιών πλοήγησης */
+.react-datepicker__navigation {
+    width: 50px;
+    height: 50px;
+    top: 10px; /* Απόσταση από την κορυφή */
+}
+
+
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range {
+    background-color: #783b8a; /* Σκούρο μοβ */
+    color: #fff;
+}
+

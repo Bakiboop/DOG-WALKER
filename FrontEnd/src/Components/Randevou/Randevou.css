@@ -1,0 +1,118 @@
+/* Βασικό στυλ για το wrapper */
+.Stoixeia-Epikoinonias {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff3fd; /* Ανοιχτό φόντο */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ελαφριά σκιά */
+}
+
+/* Στυλ για τις επικεφαλίδες */
+.Stoixeia-Epikoinonias h2,
+.Stoixeia-Epikoinonias h3 {
+    color: #4a4a4a; /* Σκούρο γκρι */
+    font-size: 20px;
+    text-align: left;
+}
+
+/* Στυλ για τα input πεδία */
+.randevouInput {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Στυλ για το dropdown επιλογής υπηρεσίας */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #4a4a4a;
+}
+
+/* Στυλ για τα labels */
+label {
+    font-size: 15px;
+    font-weight: bold;
+    color: #4a4a4a;
+}
+
+
+/* Στυλ για τα checkboxes */
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Στυλ για το container του Μηνύματος */
+.Message {
+    padding: 10px;
+}
+
+
+/* Στυλ για το textarea */
+.Message textarea {
+    width: calc(100% - 20px); /* Προσαρμογή πλάτους */
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    border: 1px solid #ccc; /* Περίγραμμα */
+    border-radius: 5px;
+    outline: none;
+    resize: none; /* Απενεργοποίηση αλλαγής μεγέθους από τον χρήστη */
+    background-color: #fff; /* Φόντο */
+    transition: border-color 0.3s ease-in-out;
+    height: auto; /* Αυτόματο ύψος */
+    min-height: 120px; /* Ελάχιστο ύψος */
+}
+
+/* Εστίαση στο textarea */
+.Message textarea:focus {
+    border-color: #783b8a; /* Έντονο μοβ */
+    box-shadow: 0 0 5px rgba(120, 59, 138, 0.5); /* Σκιά κατά την εστίαση */
+}
+
+/* Στυλ για το container του Pet Taxi */
+.PetTaxi {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Ανοιχτό φόντο */
+    border: 1px solid #ccc; /* Απαλό περίγραμμα */
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ελαφριά σκιά */
+}
+
+/* Στυλ για τα labels του Pet Taxi */
+.PetTaxi label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Στυλ για τα input πεδία */
+.PetTaxi input {
+    width: calc(100% - 20px); /* Πλήρες πλάτος με padding */
+    padding: 10px;
+    margin-bottom: 15px; /* Απόσταση μεταξύ των πεδίων */
+    font-size: 14px; /* Μέγεθος γραμματοσειράς */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* Εστίαση στα input πεδία */
+.PetTaxi input:focus {
+    border-color: #783b8a; /* Έντονο μοβ */
+    box-shadow: 0 0 5px rgba(120, 59, 138, 0.5); /* Σκιά κατά την εστίαση */
+}
+
+/* Στυλ για το checkbox */
+.PetTaxi input[type="checkbox"] {
+    margin-right: 10px; /* Απόσταση από το label */
+}

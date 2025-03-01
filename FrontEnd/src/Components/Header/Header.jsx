@@ -37,6 +37,7 @@ function Header(){
                 <ul>
                     <li><Link to ="/">Φόρμα Επικοινωνίας</Link></li>
                     <li><Link to ="/login">Σύνδεση/Εγγραφή</Link></li>
+                    <li><Link to = "/mydoggies">Τα Σκυλάκια μου</Link></li>
                     
                     
 
