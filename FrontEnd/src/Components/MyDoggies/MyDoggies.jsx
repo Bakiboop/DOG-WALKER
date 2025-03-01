@@ -9,7 +9,7 @@ export default class MyDoggies extends React.Component {
 
     componentDidMount() {
         // Φέρνουμε τα σκυλιά του χρήστη όταν φορτώνεται η σελίδα
-        axios.get("http://127.0.0.1:8000/api/dogs/", {
+        axios.get("http://127.0.0.1:8000/app/dogs/", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }

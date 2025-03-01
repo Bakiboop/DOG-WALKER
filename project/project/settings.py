@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "Rendevouz",
     "user_management",
     'corsheaders',
+    'rest_framework.authtoken',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -136,3 +137,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'user_management.User'
+
+CORS_ORIGIN_ALLOW_ALL = True 

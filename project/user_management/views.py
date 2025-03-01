@@ -8,6 +8,7 @@ from rest_framework import status
 from .serializers import UserSignUpSerializer
 from .serializers import UserLoginSerializer
 from .services import SignupService, LoginService
+from rest_framework.authtoken.models import Token
 
 
 class signup_view(APIView):
@@ -37,23 +38,27 @@ class signup_view(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class login_view(APIView):
-    serializer_class=UserLoginSerializer
+    serializer_class = UserLoginSerializer
+
     def __init__(self, login_service: LoginService = None):
-        self.login_service = login_service or LoginService()  # Εισαγωγή της υπηρεσίας
+        self.login_service = login_service or LoginService()
 
     def post(self, request, *args, **kwargs):
-        # Χρήση του UserLoginSerializer για επικύρωση των δεδομένων
+        # Επικύρωση των δεδομένων
         serializer = UserLoginSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # Αν τα δεδομένα είναι έγκυρα, πάρτε τα επικυρωμένα δεδομένα
         email = serializer.validated_data.get('email')
         password = serializer.validated_data.get('password')
 
         # Χρήση της υπηρεσίας για τη σύνδεση
-        if self.login_service.login(request, email, password):
-            return Response({'message': 'You have successfully logged in.'}, status=status.HTTP_200_OK)
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            # Δημιουργήστε ή λάβετε το token για τον χρήστη
+            token, created = Token.objects.get_or_create(user=user)
+            # Επιστροφή του token στον client
+            return Response({'token': token.key}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
 
