@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./MyDoggies.css";
+import { Navigate } from "react-router-dom";
 
 const MyDoggies = () => {
     const [doggies, setDoggies] = useState([]);
@@ -15,17 +16,8 @@ const MyDoggies = () => {
             return;
         }
 
-<<<<<<< HEAD
         axios.get("http://127.0.0.1:8000/api/dogs/", {
             headers: { "Authorization": `Bearer ${token}` }
-=======
-    componentDidMount() {
-        // Φέρνουμε τα σκυλιά του χρήστη όταν φορτώνεται η σελίδα
-        axios.get("http://127.0.0.1:8000/app/dogs/", {
-            headers: {
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            }
->>>>>>> cc406b219452401a1a2921f13dd4b26ae18f5d81
         })
         .then((res) => {
             setDoggies(res.data);
