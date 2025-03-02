@@ -81,6 +81,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
             owner=self.user
         )
 
+
         # Create a test appointment
         self.appointment = Appointment_booking.objects.create(
             start_time='2023-10-01T10:00:00Z',
