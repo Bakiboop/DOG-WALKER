@@ -11,7 +11,9 @@ export default class Login extends React.Component {
         email: '',
         password: '',
         phone_number: '',
-        address: ''
+        address: '',
+        isAuthenticated: false, // Αν είναι συνδεδεμένος ο χρήστης
+        userEmail: '' // Για να εμφανίζεται το email του χρήστη στο Heade
     };
 
 
@@ -33,10 +35,13 @@ export default class Login extends React.Component {
         .then((res) => { 
             if (res.data.token) {
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem('userEmail', email); // Αποθήκευση email
                 alert('Η Σύνδεση ήταν επιτυχής!');
                 this.setState({
                     email: '',
                     password: '',
+                    isAuthenticated: true, // Ο χρήστης συνδέθηκε
+                    userEmail: email 
                 });
             } else {
                 alert('Δεν ελήφθη token από τον server.');
@@ -47,6 +52,8 @@ export default class Login extends React.Component {
             alert('Υπήρξε πρόβλημα κατά την σύνδεση.');
         });
     }
+
+    
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -83,6 +90,9 @@ export default class Login extends React.Component {
 
 
 render() {
+    if (this.state.isAuthenticated) {
+        return <Navigate to="/" />; // Μεταφορά στο Home Page μετά τη σύνδεση
+    }
     return (
         <div className="loginWrapper">
         <div className="main">
