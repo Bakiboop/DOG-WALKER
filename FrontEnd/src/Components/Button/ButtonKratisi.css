@@ -1,13 +1,20 @@
 .button-kratisi {
     font-size: 18px;
     font-weight: bold;
-    background-color: rgb(245, 184, 245);
+    background-color: rgb(206, 130, 206);
     box-shadow: 2px 2px 2px black;
+    border: none;
     border-radius: 10px;
     padding: 10px; /* Προσθήκη padding για καλύτερη εμφάνιση */
     display: inline-block; /* Για να περιέχει το <a> στοιχείο */
     cursor: pointer;
-    
+    color: #ffffff;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.button-kratisi:hover {
+    background-color: #6a3480; /* Πιο σκούρα απόχρωση μοβ */
 }
 
 .button-kratisi a {
@@ -16,3 +23,4 @@
     display: block; /* Για να καταλαμβάνει ολόκληρο το κουμπί */
 
 }
+

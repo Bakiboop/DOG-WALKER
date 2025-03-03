@@ -25,7 +25,8 @@ SECRET_KEY = "django-insecure-#+159w@rraw=vz=4klvmwcq_cogig4zmg-idxgrok6($z98%4=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     "Rendevouz",
     "user_management",
     'corsheaders',
+    'rest_framework.authtoken',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -57,6 +59,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = "project.urls"
@@ -133,3 +137,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'user_management.User'
+
+CORS_ORIGIN_ALLOW_ALL = True 
+
