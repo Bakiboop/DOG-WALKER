@@ -6,7 +6,7 @@ import './Randevou.css';
 import './DatePicker.css';
 
 function Randevou() {
-    const services = ["Dog Walking", "Pet Sitting My Home", "Pet Sitting Your Home", "Pet Taxi", "Άλλο"];
+    const services = ["Dog Walking", "Pet Sitting My Home", "Pet Sitting Your Home", "Pet Taxi", "Other"];
     const [selectedDates, setSelectedDates] = useState([null, null]);
     const [selectedService, setSelectedService] = useState(null);
     const [dogCount, setDogCount] = useState(1);
@@ -26,6 +26,7 @@ function Randevou() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+
         // Έλεγχος ότι όλα τα απαραίτητα πεδία έχουν συμπληρωθεί
         if (!selectedService || !selectedDates[0] || !selectedDates[1] || !dogCount) {
             alert('Παρακαλώ συμπληρώστε όλα τα απαραίτητα πεδία.');
@@ -34,24 +35,27 @@ function Randevou() {
 
         // Δημιουργία του αντικειμένου δεδομένων για το backend
         const appointmentData = {
-            start_time: selectedDates[0].toISOString(), // Μετατροπή σε ISO string
-            end_time: selectedDates[1].toISOString(),  // Μετατροπή σε ISO string
-            notes: message,                            // Το μήνυμα του χρήστη
-            dogs: dogCount,                            // Ο αριθμός των σκύλων
-            type: selectedService,                     // Η επιλεγμένη υπηρεσία
+            start_time: selectedDates[0].toISOString(),
+            end_time: selectedDates[1].toISOString(),
+            notes: message,
+            dogs: dogCount,
+            type: selectedService,
         };
 
+
+
         try {
-            // Αποστολή δεδομένων στο backend
-            const response = await axios.post('http://127.0.0.1:8000/api/appointments/', appointmentData, {
+            const token = localStorage.getItem('token'); // Αν το token είναι αποθηκευμένο στο localStorage
+            const response = await axios.post('http://127.0.0.1:8000/api/appointments', appointmentData, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Προσθήκη του token
                 },
             });
+            
 
             if (response.status === 201) {
                 alert('Το ραντεβού σας καταχωρήθηκε με επιτυχία!');
-                // Εκκαθάριση των πεδίων μετά την επιτυχή υποβολή
                 setSelectedService(null);
                 setSelectedDates([null, null]);
                 setDogCount(1);
