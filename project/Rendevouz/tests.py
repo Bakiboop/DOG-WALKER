@@ -29,7 +29,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_get_appointments(self):
         # Test listing all appointments for the authenticated user
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)  # Only one appointment exists
@@ -37,7 +37,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_create_appointment(self):
         # Test creating a new appointment
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         data = {
             'start_time': '2023-10-02T10:00:00Z',
             'end_time': '2023-10-02T12:00:00Z',
@@ -51,7 +51,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_update_appointment(self):
         # Test updating an existing appointment
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         data = {
             'start_time': '2023-10-01T10:00:00Z',  # Identify the appointment by start_time and type
             'type': 'PW',
@@ -65,7 +65,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_delete_appointment(self):
         # Test deleting an existing appointment
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         data = {
             'start_time': '2023-10-01T10:00:00Z',  # Identify the appointment by start_time and type
             'type': 'PW'
@@ -76,7 +76,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_create_appointment_invalid_data(self):
         # Test creating an appointment with invalid data
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         data = {
             'start_time': '2023-10-02T10:00:00Z',
             'end_time': '2023-10-02T12:00:00Z',
@@ -90,7 +90,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_update_appointment_not_found(self):
         # Test updating a non-existent appointment
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         data = {
             'start_time': '2023-10-01T11:00:00Z',  # Incorrect start_time
             'type': 'PW',
@@ -103,7 +103,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
 
     def test_delete_appointment_not_found(self):
         # Test deleting a non-existent appointment
-        url = reverse('appointments-list')
+        url = reverse('appointments')
         data = {
             'start_time': '2023-10-01T11:00:00Z',  # Incorrect start_time
             'type': 'PW'
