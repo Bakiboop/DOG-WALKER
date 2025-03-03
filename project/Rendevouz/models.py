@@ -1,11 +1,7 @@
 from django.db import models
 from user_management.models import User
 
-class Dog(models.Model):
-    breed=models.CharField(max_length=30)
-    age=models.SmallIntegerField()
-    dog_name=models.CharField(max_length=100)
-    owner=models.ForeignKey(User , on_delete=models.CASCADE, related_name="dogs")
+
 
 
 
@@ -20,7 +16,7 @@ class Appointment_booking(models.Model):
     start_time=models.DateTimeField()
     end_time=models.DateTimeField(null=True)
     notes=models.TextField( null=True)
-    dogs=models.ForeignKey(Dog,on_delete=models.CASCADE,related_name="appointment")
+    dogs=models.PositiveSmallIntegerField()
     owner=models.ForeignKey(User,on_delete=models.CASCADE, related_name="appointment")
     type=models.CharField(max_length=2,choices=Appointment_types)
     
