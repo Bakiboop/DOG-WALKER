@@ -19,7 +19,7 @@ class AppointmentsView(APIView):
             # Retrieve all appointments for the current user
             appointments = self.appointment_service.get_appointments_by_owner(request.user)
             serializer = AppointmentBookingSerializer(appointments, many=True)
-            return Response(serializer.data)
+            return Response(status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -27,7 +27,7 @@ class AppointmentsView(APIView):
         try:
             # Create a new appointment
             serializer = self.appointment_service.create_appointment(request.user, request.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response( status=status.HTTP_201_CREATED)
         except ValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
@@ -37,7 +37,7 @@ class AppointmentsView(APIView):
         try:
             # Update an existing appointment
             serializer = self.appointment_service.update_appointment(request.user, request.data)
-            return Response(serializer.data)
+            return Response(status=status.HTTP_201_CREATED)
         except ValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:

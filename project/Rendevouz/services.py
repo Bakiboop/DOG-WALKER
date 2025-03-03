@@ -10,6 +10,7 @@ class AppointmentService:
     def create_appointment(self, user, data):
         # Create a new appointment for the user
         serializer = AppointmentBookingSerializer(data=data)
+        
         if serializer.is_valid():
             serializer.save(owner=user)
             return serializer
