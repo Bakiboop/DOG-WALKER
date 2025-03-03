@@ -52,7 +52,7 @@ function Header() {
                     {/* Αν υπάρχει χρήστης, δείξε το email του και το κουμπί logout */}
                     {userEmail ? (
                         <>
-                            <li className="user-info">Συνδεδεμένος ως: {userEmail}</li>
+                            <li className="user-info">Συνδεδεμένος ως: {userEmail}  </li>
                             <li><button className="logout-button" onClick={handleLogout}>Αποσύνδεση</button></li>
                         </>
                     ) : (

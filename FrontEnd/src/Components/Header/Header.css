@@ -78,3 +78,19 @@ header {
     height: auto;
 }
 
+.navbar ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Ξεκινάει τα στοιχεία από αριστερά */
+    width: 100%;
+}
+
+.user-info {
+    margin-left: auto; /* Μετακινεί το email τέρμα δεξιά */
+    margin-right: 10px; /* Προσθέτει κενό δεξιά από το email */
+    white-space: nowrap;
+}
+
+.logout-button {
+    padding: 10px;
+}
