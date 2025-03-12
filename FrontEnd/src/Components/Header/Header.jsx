@@ -47,6 +47,7 @@ function Header() {
             <nav className="navbar">
                 <ul>
                     <li><Link to="/mydoggies">Τα Σκυλάκια μου</Link></li>
+                    <li><Link to="/myradevou">Τα Ραντεβούζ μου</Link></li>                    
 
                     {/* Αν υπάρχει χρήστης, δείξε το email του και το κουμπί logout */}
                     {userEmail ? (

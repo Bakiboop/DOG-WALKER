@@ -24,7 +24,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
             notes='Regular checkup',
             dogs=1,
             owner=self.user,
-            type='DW'  # Pet walking
+            type='DG'  # Pet walking
         )
 
     def test_get_appointments(self):
@@ -55,7 +55,8 @@ class AppointmentsViewIntegrationTests(APITestCase):
         data = {
             'start_time': '2023-10-01T10:00:00Z',
             'end_time': '2023-11-01T13:00:00Z',  # Identify the appointment by start_time and type
-            'type': 'DW',
+            'type': 'DG',
+            'dogs':1,
             'notes': 'Updated notes',
             
         }
@@ -69,7 +70,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-01T10:00:00Z',  # Identify the appointment by start_time and type
-            'type': 'DW'
+            'type': 'DG'
         }
         response = self.client.delete(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -93,7 +94,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-01T11:00:00Z',  # Incorrect start_time
-            'type': 'DW',
+            'type': 'DG',
             'notes': 'Updated notes',
             'end_time': '2023-10-01T13:00:00Z'
         }
@@ -106,7 +107,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-01T11:00:00Z',  # Incorrect start_time
-            'type': 'DW'
+            'type': 'DG'
         }
         response = self.client.delete(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
