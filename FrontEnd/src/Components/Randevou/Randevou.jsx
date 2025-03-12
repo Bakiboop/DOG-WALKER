@@ -6,7 +6,7 @@ import './Randevou.css';
 import './DatePicker.css';
 
 function Randevou() {
-    const services = ["Dog Walking", "Pet Sitting My Home", "Pet Sitting Your Home", "Pet Taxi", "Άλλο"];
+    const services = ["DG", "PM", "PY", "PT", "AL"];
     const [selectedDates, setSelectedDates] = useState([null, null]);
     const [selectedService, setSelectedService] = useState(null);
     const [dogCount, setDogCount] = useState(1);
@@ -40,12 +40,14 @@ function Randevou() {
             dogs: dogCount,                            // Ο αριθμός των σκύλων
             type: selectedService,                     // Η επιλεγμένη υπηρεσία
         };
-
+        console.log(appointmentData)
+        const token = localStorage.getItem('token'); // Assuming the token is stored with the key 'token'
         try {
             // Αποστολή δεδομένων στο backend
             const response = await axios.post('http://127.0.0.1:8000/api/appointments/', appointmentData, {
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Token ${token}`,
                 },
             });
 

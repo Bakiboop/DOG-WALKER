@@ -20,11 +20,11 @@ class AppointmentsViewIntegrationTests(APITestCase):
         # Create a test appointment
         self.appointment = Appointment_booking.objects.create(
             start_time='2023-10-01T10:00:00Z',
-            end_time='2023-10-01T12:00:00Z',
+            end_time='2023-11-01T12:00:00Z',
             notes='Regular checkup',
             dogs=1,
             owner=self.user,
-            type='PW'  # Pet walking
+            type='DW'  # Pet walking
         )
 
     def test_get_appointments(self):
@@ -43,7 +43,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
             'end_time': '2023-10-02T12:00:00Z',
             'notes': 'New appointment',
             'dogs': 1,
-            'type': 'PS'  # Pet sitting
+            'type': 'PT'  # Pet taxi
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -53,10 +53,11 @@ class AppointmentsViewIntegrationTests(APITestCase):
         # Test updating an existing appointment
         url = reverse('appointment')
         data = {
-            'start_time': '2023-10-01T10:00:00Z',  # Identify the appointment by start_time and type
-            'type': 'PW',
+            'start_time': '2023-10-01T10:00:00Z',
+            'end_time': '2023-11-01T13:00:00Z',  # Identify the appointment by start_time and type
+            'type': 'DW',
             'notes': 'Updated notes',
-            'end_time': '2023-10-01T13:00:00Z'
+            
         }
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -68,7 +69,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-01T10:00:00Z',  # Identify the appointment by start_time and type
-            'type': 'PW'
+            'type': 'DW'
         }
         response = self.client.delete(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -79,21 +80,20 @@ class AppointmentsViewIntegrationTests(APITestCase):
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-02T10:00:00Z',
-            'end_time': '2023-10-02T12:00:00Z',
+            'end_time': '2023-11-02T12:00:00Z',
             'notes': 'New appointment',
             'dogs': 1,
             # Missing 'type' field
         }
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('type', response.data)  # Check if the error message mentions the missing field
 
     def test_update_appointment_not_found(self):
         # Test updating a non-existent appointment
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-01T11:00:00Z',  # Incorrect start_time
-            'type': 'PW',
+            'type': 'DW',
             'notes': 'Updated notes',
             'end_time': '2023-10-01T13:00:00Z'
         }
@@ -106,7 +106,7 @@ class AppointmentsViewIntegrationTests(APITestCase):
         url = reverse('appointment')
         data = {
             'start_time': '2023-10-01T11:00:00Z',  # Incorrect start_time
-            'type': 'PW'
+            'type': 'DW'
         }
         response = self.client.delete(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

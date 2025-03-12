@@ -140,3 +140,9 @@ AUTH_USER_MODEL = 'user_management.User'
 
 CORS_ORIGIN_ALLOW_ALL = True 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # Enable token authentication
+    ],
+}
+
